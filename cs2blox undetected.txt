@@ -1,1 +1,67 @@
+local player = game.Players.LocalPlayer
 
+-- ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "DetectedGUI"
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+-- Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 300, 0, 140)
+frame.Position = UDim2.new(0.5, -150, 0.5, -70)
+frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+
+-- Köşe
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 15)
+corner.Parent = frame
+
+-- Ana yazı
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, 0, 0.6, 0)
+textLabel.Position = UDim2.new(0, 0, 0, 0)
+textLabel.BackgroundTransparency = 1
+textLabel.Text = "DETECTED"
+textLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+textLabel.TextScaled = true
+textLabel.Font = Enum.Font.GothamBold
+textLabel.Parent = frame
+
+-- Alt yazı (yeni eklenen)
+local subText = Instance.new("TextLabel")
+subText.Size = UDim2.new(1, 0, 0.4, 0)
+subText.Position = UDim2.new(0, 0, 0.6, 0)
+subText.BackgroundTransparency = 1
+subText.Text = "Next update in 15 minutes"
+subText.TextColor3 = Color3.fromRGB(200, 200, 200)
+subText.TextScaled = true
+subText.Font = Enum.Font.Gotham
+subText.Parent = frame
+
+-- Fade-in
+frame.BackgroundTransparency = 1
+textLabel.TextTransparency = 1
+subText.TextTransparency = 1
+
+for i = 1, 0, -0.05 do
+	frame.BackgroundTransparency = i
+	textLabel.TextTransparency = i
+	subText.TextTransparency = i
+	wait(0.03)
+end
+
+-- 3 saniye bekle
+wait(3)
+
+-- Fade-out
+for i = 0, 1, 0.05 do
+	frame.BackgroundTransparency = i
+	textLabel.TextTransparency = i
+	subText.TextTransparency = i
+	wait(0.03)
+end
+
+-- Sil
+screenGui:Destroy()
